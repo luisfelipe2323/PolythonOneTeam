@@ -1,0 +1,16 @@
+{
+  "name": "1-binding-1-2-way-array-binding",
+  "main": "1-binding-1-2-way-array-binding.html",
+  "dependencies": {
+    "polymer": "^2.2.0",
+    "paper-button": "^2.0.0"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  }
+}

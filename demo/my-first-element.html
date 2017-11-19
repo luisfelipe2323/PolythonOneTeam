@@ -1,0 +1,124 @@
+<!-- Si colocamos la línea de abajo en el index.html
+     ya no haría falta ponerla en cada comnponente
+-->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<dom-module id="my-first-element">
+   <template>
+      <style>
+      :host {
+         display: block;
+         text-align: center;
+         background-color: #BC1E30;
+         min-width: 300px;
+         color: #fff;
+         margin: 15px;
+      }
+      </style>
+
+      <h2 id="nombre">Hola {{name}}</h2>
+      <div class="content-wrapper">
+         <content></content>
+      </div>
+      <p id="byeP">Adios {{name}}</p>
+      <!-- Podríamos utilizar corchetes porque no vamos a hacer doble bindeo-->
+      <h2>Hola {{name}} {{lastName}}</h2>
+
+      <!-- Ahora biendeamos subpropiedades -->
+      <p>Movil: {{phone.mobile}}</p>
+      <p>Trabajo: {{phone.work}}</p>
+
+      <!-- Bindeo a elementos nativos. Aquí si hay doble bindeo de verdad -->
+      <!-- Con el evento input, el valosr del input pasará al valor de la propiedad -->
+      <!-- Fijarse en reflectToAttribute: true -->
+      <input value="{{name::input}}">
+      <input value="{{lastName::input}}">
+      <hr>
+
+      <!-- Computed binding -->
+      <input value="{{numberA::input}}">
+      <input value="{{numberB::input}}">
+      <p>Multiplicar: {{numberA}}x{{numberB}}={{multiply(numberA, numberB)}}</p>
+
+      <!-- Array binding -->
+      <h3>Amigos:</h3>
+      <p>[[arrayItem(friends.*, 0, 'name')]]</p>
+      <p>[[arrayItem(friends.*, 1, 'name')]]</p>
+      <p>[[arrayItem(friends.*, 2, 'name')]]</p>
+
+   </template>
+
+   <script>
+      Polymer({
+         is: 'my-first-element',
+
+         properties: {
+            name: {
+               type: String,
+               value: "element",
+               reflectToAttribute: true,
+               readOnly: false,
+               notify: false,
+            },
+
+            lastName:{
+                  type: String,
+                  value: "Lastname default",
+                  reflectToAttribute: true
+            },
+
+            phone:{
+              type: Object,
+              value: {
+                mobile: "111-111-111",
+                work: "222-222-222"
+              }
+            },
+
+            numberA:{
+               type: Number,
+               value: 2
+            },
+
+            numberB:{
+               type: Number,
+               value: 5
+            },
+
+            friends:{
+               type: Array,
+               value: [
+                 {name: "Luis"},
+                 {name: "Marco"},
+                 {name: "Adriana"}
+               ]
+            },
+
+            myTest: { // el evento: my-test-changed lo pone Polymer automátivamente
+               type: String,
+               value: "default",
+               notify:true
+            }
+         },
+
+         multiply: function(a, b){
+            return a*b;
+         },
+
+         arrayItem: function(change, index, path) {
+            // this.get(path, root) returns a value for a path
+            // relative to a root object.
+            return this.get(path, change.base[index]);
+         },
+
+         listeners: {
+            'nombre.click': '_nombreClick'
+         },
+
+         _nombreClick: function(e) {
+            e.stopPropagation();
+            alert('_nombreClick');
+         }
+      })
+   </script>
+
+</dom-module>

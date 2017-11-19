@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="1-binding-1-2-way-array-binding">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `1-binding-1-2-way-array-binding`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class 1Binding12WayArrayBinding extends Polymer.Element {
+      static get is() { return '1-binding-1-2-way-array-binding'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: '1-binding-1-2-way-array-binding'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(1Binding12WayArrayBinding.is, 1Binding12WayArrayBinding);
+  </script>
+</dom-module>
